@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tool KDZ 2.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #000000, #003333);
+      color: #00ffcc;
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #00ffd5;
+      text-shadow: 0 0 10px #00ffcc;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffcc;
+      }
+      to {
+        text-shadow: 0 0 20px #00ffee, 0 0 30px #00ffee;
+      }
+    }
+
+    input, button {
+      width: 90%;
+      max-width: 400px;
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      display: block;
+      transition: 0.3s ease;
+    }
+
+    input {
+      background: #111;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      box-shadow: 0 0 5px #00ffcc44;
+    }
+
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 12px #00ffccaa;
+    }
+
+    .btn-select {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 15px auto;
+      max-width: 400px;
+    }
+
+    .btn-select button {
+      flex: 1;
+      padding: 10px;
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #00ffcc99;
+      transition: 0.3s ease;
+    }
+
+    .btn-select button:hover {
+      background: #00e6b8;
+      transform: scale(1.05);
+    }
+
+    .selected {
+      box-shadow: 0 0 10px 2px #00ffcc;
+    }
+
+    .start {
+      background: #00cc99;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00cc9988;
+    }
+
+    .start:hover {
+      background: #00b386;
+    }
+
+    .buff-box {
+      margin-top: 25px;
+      padding: 20px;
+      border: 2px solid #00ffcc;
+      border-radius: 12px;
+      background-color: #001111;
+      box-shadow: 0 0 15px #00ffcc33;
+    }
+
+    .success {
+      color: #00ff88;
+      font-size: 18px;
+      margin-top: 10px;
+      word-wrap: break-word;
+    }
+
+    .selected-app {
+      margin: 10px auto;
+      font-size: 16px;
+      color: #00ffff;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #00cccc;
+      opacity: 0.8;
+      border-top: 1px solid #00ffcc44;
+      padding-top: 10px;
+    }
+
+    .footer b {
+      color: #00ffcc;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      input, button {
+        font-size: 15px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Tool KDZ 2.0</h1>
+
+  <input type="number" id="userId" placeholder="Nhập ID người dùng">
+  <div class="btn-select">
+    <button onclick="setApp('cashzine', this)">Cashzine</button>
+    <button onclick="setApp('novelah', this)">Novelah</button>
+    <button onclick="setApp('fundrama', this)">Fundrama</button>
+  </div>
+
+  <div class="selected-app" id="selectedAppDisplay">🧠 Ứng dụng đã chọn: <i>Chưa chọn</i></div>
+
+  <button class="start" onclick="startBuff()">🥷 Tạo ref</button>
+
+  <div class="buff-box" id="statusBox">
+    <p>⚡ Trạng thái: Chưa bắt đầu</p>
+    <p class="success" id="resultText"></p>
+  </div>
+
+  <div class="footer">
+    📱 TikTok: <b>@buffdiemcashzine</b> &nbsp; | &nbsp; 👨‍💻 Dev: <b>kudodz</b>
+  </div>
+
+  <script>
+    let selectedApp = "";
+    let selectedButton = null;
+
+    function setApp(app, btnElement) {
+      selectedApp = app;
+      document.getElementById("selectedAppDisplay").innerHTML = `🧠 Ứng dụng đã chọn: <b>${capitalize(app)}</b>`;
+
+      if (selectedButton) {
+        selectedButton.classList.remove("selected");
+      }
+      btnElement.classList.add("selected");
+      selectedButton = btnElement;
+
+      Swal.fire({
+        icon: 'info',
+        title: 'Đã chọn ứng dụng',
+        text: `Bạn đã chọn: ${capitalize(app)}`,
+        confirmButtonColor: '#00cc99'
+      });
+    }
+
+    function startBuff() {
+      const id = document.getElementById("userId").value.trim();
+      const resultText = document.getElementById("resultText");
+      const statusBox = document.getElementById("statusBox");
+
+      if (!id || selectedApp === "") {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Thiếu thông tin',
+          text: 'Vui lòng nhập ID và chọn ứng dụng!',
+          confirmButtonColor: '#f27474'
+        });
+        return;
+      }
+
+      statusBox.children[0].textContent = "🚀 Đang tạo mã...";
+
+      setTimeout(() => {
+        let code = "";
+        let appName = capitalize(selectedApp);
+        if (selectedApp === "cashzine") code = "70927079";
+        else if (selectedApp === "novelah") code = "58558308";
+        else if (selectedApp === "fundrama") code = "60126989";
+
+        statusBox.children[0].textContent = "✅ Đã hoàn tất";
+        resultText.textContent = `Đã tạo mã thành công cho ${id}: ${code} (${appName})`;
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Hoàn tất!',
+          html: `Đã tạo mã thành công cho <b>${id}</b><br>Mã: <b>${code}</b><br>App: <b>${appName}</b><br>Hướng dẫn nhập mã:<br><b>Vào app ${appName} , ấn vào Tôi , ấn vào Nhập mã lời mời. Sao chép Code đã tạo và dán vào và liên kết.`,
+          confirmButtonColor: '#00cc99'
+        });
+      }, 1000);
+    }
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+  </script>
+</body>
+</html>
