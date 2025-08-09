@@ -2,10 +2,12 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Tool KDZ 2.0</title>
+  <title>KDZ Tool - MENU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta name="author" content="kudodz">
+  <meta name="keywords" content="kdztool, cashzine, novelah, xworld">
+  <link href="//fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body {
       background: linear-gradient(135deg, #000000, #003333);
@@ -228,6 +230,25 @@
 
     function capitalize(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    //get query
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    //load trang
+    window.onload = function () {
+      const toolParam = getQueryParam('tool');
+      if (toolParam && ['cashzine', 'novelah', 'fundrama'].includes(toolParam.toLowerCase())) {
+        const button = Array.from(document.querySelectorAll('.btn-select button'))
+          .find(btn => btn.textContent.toLowerCase() === toolParam.toLowerCase());
+        if (button) {
+          setApp(toolParam.toLowerCase(), button);
+          document.querySelector('.btn-select').style.display = 'none';
+        }
+      }
     }
   </script>
 </body>
