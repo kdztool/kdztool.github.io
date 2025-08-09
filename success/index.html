@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>success ( test )</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #000000, #003333);
+      color: #00ffcc;
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #00ffd5;
+      text-shadow: 0 0 10px #00ffcc;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ffee, 0 0 30px #00ffee; }
+    }
+    input, button {
+      width: 90%;
+      max-width: 400px;
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      display: block;
+      transition: 0.3s ease;
+    }
+    input {
+      background: #111;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      box-shadow: 0 0 5px #00ffcc44;
+    }
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 12px #00ffccaa;
+    }
+    .btn-select {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 15px auto;
+      max-width: 400px;
+    }
+    .btn-select button {
+      flex: 1;
+      padding: 10px;
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #00ffcc99;
+      transition: 0.3s ease;
+    }
+    .btn-select button:hover {
+      background: #00e6b8;
+      transform: scale(1.05);
+    }
+    .selected {
+      box-shadow: 0 0 10px 2px #00ffcc;
+    }
+    .start {
+      background: #00cc99;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00cc9988;
+    }
+    .start:hover {
+      background: #00b386;
+    }
+    .buff-box {
+      margin-top: 25px;
+      padding: 20px;
+      border: 2px solid #00ffcc;
+      border-radius: 12px;
+      background-color: #001111;
+      box-shadow: 0 0 15px #00ffcc33;
+    }
+    .success {
+      color: #00ff88;
+      font-size: 18px;
+      margin-top: 10px;
+      word-wrap: break-word;
+    }
+    .selected-app {
+      margin: 10px auto;
+      font-size: 16px;
+      color: #00ffff;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #00cccc;
+      opacity: 0.8;
+      border-top: 1px solid #00ffcc44;
+      padding-top: 10px;
+    }
+    .footer b {
+      color: #00ffcc;
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 26px; }
+      input, button { font-size: 15px; padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Nhật ký</h1>
+
+  <div class="buff-box" id="statusBox">
+    <p>------------------USER INFO------------------</p>
+    <p>Đã Lấy Thông Tin Người Dùng Thành Công!</p>
+    <p>Tên Người Dùng: kudodz</p>
+    <p>ID Của Bạn: 70927079</p>
+    <p>------------------BUFF PROCESS------------------</p>
+    <p>[17:18:29] Đã bắt đầu quá trình buff cho ID : 70927079</p>
+    <p>[17:19:23] Đã kết nối đến API buff điểm.</p>
+    <p>[17:20:17] {"status":"success","points":"17844"}</p>
+    <p>[17:20:18] Đã thêm 17844 điểm</p>
+    <p>[17:20:27] {"status":"success","points":"2156"}</p>
+    <p>Đã thêm 2156 điểm</p>
+    <p>[17:21:36] Buff thành công tổng cộng : 20000 điểm cho ID 70927079.</p>
+  </div>
+
+  <div class="footer">
+    📱 TikTok: <b>@buffdiemcashzine</b> &nbsp; | &nbsp; 👨‍💻 Dev: <b>kudodz</b>
+  </div>
+</body>
+</html>
